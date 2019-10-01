@@ -18,8 +18,8 @@ namespace PayrollTests.AU.Integration.ValidationErrors
             }
             catch (ValidationException e)
             {
-                Assert.True(e.ValidationErrors.Any(p => p.Message == "The Last Name is required."));
-                Assert.True(e.ValidationErrors.Any(p => p.Message == "The Home Address is required."));
+                Assert.True(e.Errors.Any(er => er.ValidationErrors.Any(ve => ve.Message == "The Last Name is required.")));
+                Assert.True(e.Errors.Any(er => er.ValidationErrors.Any(ve => ve.Message == "The Home Address is required.")));
                 return;
             }
 

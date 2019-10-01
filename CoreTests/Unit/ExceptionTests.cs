@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Xero.Api.Infrastructure.Exceptions;
 using Xero.Api.Infrastructure.Model;
@@ -12,7 +13,7 @@ namespace CoreTests.Unit
         public void ManageNullValidationErrorsInApiException()
         {
             var validationException = new ValidationException(ApiException);
-            Assert.That(validationException.ValidationErrors, Has.Count.EqualTo(5));
+            Assert.That(validationException.Errors.Where(er => er.ValidationErrors != null).SelectMany(er => er.ValidationErrors).ToList(), Has.Count.EqualTo(5));
         }
 
         private ApiException ApiException
